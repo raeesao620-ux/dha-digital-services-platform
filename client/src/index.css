@@ -1,0 +1,970 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Slab:wght@400;600;700&family=Roboto+Mono:wght@400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile optimizations */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Touch-friendly buttons */
+  button, [role="button"], input[type="button"], input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent zoom on input focus on mobile */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Safe area for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+@layer components {
+  /* Mobile-first navigation */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-50 safe-area-bottom;
+  }
+  
+  /* Mobile-optimized cards */
+  .mobile-card {
+    @apply rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 m-2 touch-manipulation;
+  }
+  
+  /* Responsive text sizes */
+  .text-responsive-xs { @apply text-xs sm:text-sm; }
+  .text-responsive-sm { @apply text-sm sm:text-base; }
+  .text-responsive-base { @apply text-base sm:text-lg; }
+  .text-responsive-lg { @apply text-lg sm:text-xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl; }
+}
+
+@layer utilities {
+  /* Hide scrollbars but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Mobile-specific utilities */
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+  
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+  
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+:root {
+  --radius: 4px;
+  
+  /* Official South African Government Colors - Republic of South Africa Standards */
+  --sa-green: #007749; /* Official SA Flag Green */
+  --sa-yellow: #FCB514; /* Official SA Flag Yellow/Gold */
+  --sa-black: #000000; /* Official SA Flag Black */
+  --sa-white: #FFFFFF; /* Official SA Flag White */
+  --sa-red: #DE3831; /* Official SA Flag Red */
+  --sa-blue: #001489; /* Official SA Flag Blue */
+  
+  /* Official DHA Government Theme */
+  --background: hsl(0, 0%, 100%); /* Pure white background */
+  --foreground: hsl(0, 0%, 10%); /* Very dark text for maximum readability */
+  --card: hsl(0, 0%, 99%); /* Subtle off-white for cards */
+  --card-foreground: hsl(0, 0%, 10%); /* Dark text on cards */
+  --popover: hsl(0, 0%, 100%); /* White popover */
+  --popover-foreground: hsl(0, 0%, 10%); /* Dark text */
+  
+  /* Primary Government Colors */
+  --primary: hsl(151, 100%, 23%); /* SA Government Green #007749 */
+  --primary-foreground: hsl(0, 0%, 100%); /* White text on green */
+  --secondary: hsl(42, 97%, 53%); /* SA Government Gold #FCB514 */
+  --secondary-foreground: hsl(0, 0%, 10%); /* Dark text on gold */
+  
+  /* Official Government Professional Styling */
+  --muted: hsl(0, 0%, 97%); /* Light gray background */
+  --muted-foreground: hsl(0, 0%, 40%); /* Medium gray text */
+  --accent: hsl(228, 100%, 27%); /* SA Blue accent #001489 */
+  --accent-foreground: hsl(0, 0%, 100%); /* White on blue */
+  --destructive: hsl(3, 72%, 52%); /* Official SA Red #DE3831 */
+  --destructive-foreground: hsl(0, 0%, 100%); /* White on red */
+  
+  /* Official Government Borders and Inputs */
+  --border: hsl(0, 0%, 85%); /* Professional gray borders */
+  --input: hsl(0, 0%, 99%); /* Very light input background */
+  --ring: hsl(42, 97%, 53%); /* Gold focus rings */
+  
+  /* Official Government Service Colors */
+  --certificate-green: #007749;
+  --certificate-border: #005432;
+  --government-blue: #001489;
+  --official-gold: #FCB514;
+  --government-red: #DE3831;
+  --government-black: #000000;
+  
+  /* Document Type Specific Colors */
+  --refugee-color: #8B4513; /* Maroon for refugee documents */
+  --diplomatic-color: #4B0082; /* Deep purple for diplomatic */
+  --emergency-color: #FF8C00; /* Orange for emergency docs */
+  
+  /* Sidebar variables for DHA theme */
+  --sidebar-background: hsl(0, 0%, 98%);
+  --sidebar-foreground: hsl(0, 0%, 20%);
+  --sidebar-primary: hsl(151, 100%, 23%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(0, 0%, 96%);
+  --sidebar-accent-foreground: hsl(0, 0%, 15%);
+  --sidebar-border: hsl(0, 0%, 90%);
+  --sidebar-ring: hsl(151, 100%, 23%);
+  
+  --font-sans: "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-heading: "Roboto Slab", "Georgia", serif;
+  --font-mono: "Roboto Mono", "Courier New", monospace;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Official South African Government Header */
+.sa-government-header {
+  background: var(--sa-green);
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 4px solid var(--sa-yellow);
+  position: relative;
+}
+
+.sa-government-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--sa-green) 20%, 
+    var(--sa-yellow) 35%, 
+    var(--sa-black) 50%, 
+    var(--sa-white) 65%, 
+    var(--sa-red) 80%, 
+    var(--sa-blue) 100%);
+}
+
+/* Official DHA Header */
+.dha-header {
+  background: var(--sa-green);
+  color: white;
+  padding: 1.25rem;
+  border-bottom: 3px solid var(--sa-yellow);
+  font-family: var(--font-heading);
+}
+
+.government-card {
+  background: var(--card);
+  border: 1px solid var(--sa-green);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.government-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sa-green) 0%, var(--sa-yellow) 100%);
+  border-radius: 4px 4px 0 0;
+}
+
+.certificate-border {
+  border: 2px solid var(--sa-green);
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 2rem;
+}
+
+.certificate-border::after {
+  content: '🇿🇦';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.official-seal {
+  background: var(--sa-green);
+  border: 3px solid var(--sa-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--sa-white), 0 0 0 4px var(--sa-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+}
+
+.sa-flag-colors {
+  background: linear-gradient(90deg, 
+    var(--sa-green) 0%, 
+    var(--sa-yellow) 20%, 
+    var(--sa-black) 40%, 
+    var(--sa-white) 60%, 
+    var(--sa-red) 80%, 
+    var(--sa-blue) 100%);
+  height: 4px;
+}
+
+.government-button {
+  background: var(--sa-green);
+  color: white;
+  border: 2px solid var(--sa-green);
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+}
+
+.government-button:hover {
+  background: #005432;
+  border-color: #005432;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.government-button-secondary {
+  background: var(--sa-yellow);
+  color: var(--sa-black);
+  border: 2px solid var(--sa-yellow);
+}
+
+.government-button-secondary:hover {
+  background: #E5A013;
+  border-color: #E5A013;
+}
+
+.dha-badge {
+  background: var(--sa-green);
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--sa-green);
+}
+
+.refugee-badge {
+  background: var(--refugee-color);
+  border-color: var(--refugee-color);
+}
+
+.diplomatic-badge {
+  background: var(--diplomatic-color);
+  border-color: var(--diplomatic-color);
+}
+
+/* Government Professional Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+/* Official Government Notice Styling */
+.government-notice {
+  background: #FFF9E6;
+  border-left: 4px solid var(--sa-yellow);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.government-notice-urgent {
+  background: #FFE6E6;
+  border-left-color: var(--sa-red);
+}
+
+.government-disclaimer {
+  background: #F0F0F0;
+  border: 1px solid #CCC;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Official SA Government Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--sa-green) 0%, var(--sa-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+/* Document Type Headers */
+.refugee-header {
+  background: linear-gradient(135deg, var(--refugee-color) 0%, #6B3410 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 4px 4px 0 0;
+}
+
+.diplomatic-header {
+  background: linear-gradient(135deg, var(--diplomatic-color) 0%, #3A006F 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Official SA Flag Styling */
+.sa-flag-banner {
+  height: 6px;
+  background: linear-gradient(90deg, 
+    var(--sa-green) 0%, 
+    var(--sa-green) 15%,
+    var(--sa-yellow) 15%, 
+    var(--sa-yellow) 30%,
+    var(--sa-black) 30%, 
+    var(--sa-black) 45%,
+    var(--sa-white) 45%, 
+    var(--sa-white) 60%,
+    var(--sa-red) 60%, 
+    var(--sa-red) 75%,
+    var(--sa-blue) 75%, 
+    var(--sa-blue) 100%);
+}
+
+.sa-coat-of-arms {
+  width: 60px;
+  height: 60px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23007749"/><text x="50" y="55" text-anchor="middle" fill="white" font-size="12" font-weight="bold">RSA</text></svg>') no-repeat center;
+  background-size: contain;
+}
+
+/* Official Government Form Styling */
+.government-form {
+  background: white;
+  border: 1px solid var(--sa-green);
+  border-radius: 4px;
+  padding: 2rem;
+  position: relative;
+}
+
+.government-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--sa-flag-colors);
+}
+
+.government-form .form-header {
+  background: var(--sa-green);
+  color: white;
+  padding: 1.25rem;
+  margin: -2rem -2rem 2rem -2rem;
+  border-radius: 3px 3px 0 0;
+  text-align: center;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--sa-yellow);
+}
+
+.form-section {
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #FAFAFA;
+}
+
+.form-section-title {
+  font-weight: 600;
+  color: var(--sa-green);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* Official document preview styling */
+.document-preview {
+  background: white;
+  border: 3px solid var(--certificate-green);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 119, 73, 0.15);
+  min-height: 400px;
+  position: relative;
+}
+
+.document-preview::before {
+  content: '🇿🇦';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+}
+
+.document-preview .dha-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  font-size: 3rem;
+  color: rgba(0, 119, 73, 0.1);
+  font-weight: 900;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Official DHA page styling */
+.dha-page {
+  background: white;
+  min-height: 100vh;
+}
+
+.hero-bg {
+  background: linear-gradient(135deg, 
+    rgba(0, 119, 73, 0.05) 0%, 
+    rgba(255, 255, 255, 1) 50%,
+    rgba(0, 20, 137, 0.05) 100%);
+}
+
+/* Status indicators for government services */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-online {
+  background: var(--primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.typing-animation {
+  animation: typing 1.5s steps(40, end) infinite;
+}
+
+@keyframes typing {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* Progress Stepper Styling */
+.progress-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.progress-stepper::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #E0E0E0;
+  z-index: 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-step-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #E0E0E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.progress-step.completed .progress-step-indicator {
+  background: var(--sa-green);
+  border-color: var(--sa-green);
+  color: white;
+}
+
+.progress-step.active .progress-step-indicator {
+  background: var(--sa-yellow);
+  border-color: var(--sa-yellow);
+  color: var(--sa-black);
+}
+
+.progress-step-label {
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 100px;
+}
+
+/* Delivery Tracking Styling */
+.delivery-tracker {
+  border: 1px solid var(--sa-green);
+  border-radius: 4px;
+  padding: 1.5rem;
+  background: #F9F9F9;
+}
+
+.delivery-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid #E0E0E0;
+}
+
+.delivery-status.in-transit {
+  border-color: var(--sa-yellow);
+  background: #FFFEF5;
+}
+
+.delivery-status.delivered {
+  border-color: var(--sa-green);
+  background: #F0FFF4;
+}
+
+/* Print Queue Styling */
+.print-queue {
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.print-queue-header {
+  background: var(--sa-green);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.print-queue-item {
+  padding: 1rem;
+  border-bottom: 1px solid #E0E0E0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.print-queue-item:hover {
+  background: #F9F9F9;
+}
+
+.stream-text {
+  background: linear-gradient(90deg, transparent, rgba(0, 119, 73, 0.3), transparent);
+  background-size: 200% 100%;
+  animation: stream 2s linear infinite;
+}
+
+@keyframes stream {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite both;
+}
+
+.pulse-dot:nth-child(1) { animation-delay: -0.32s; }
+.pulse-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse-dot {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.sidebar-hidden {
+  transform: translateX(-100%);
+}
+
+.context-hidden {
+  transform: translateX(100%);
+}
+
+/* Custom scrollbar for DHA white theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--certificate-green);
+}
+
+/* Complete DHA White Theme Implementation */
+.btn-enhanced {
+  background: var(--primary);
+  color: white;
+  border: 2px solid var(--certificate-border);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-enhanced:hover {
+  background: var(--certificate-border);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 119, 73, 0.2);
+}
+
+/* Security badges for official government styling */
+.security-badge {
+  background: var(--primary);
+  color: white;
+  border: 1px solid var(--certificate-border);
+}
+
+.security-level-1 {
+  background: var(--certificate-green);
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-online {
+  background: var(--primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Prose styling for AI responses */
+.prose {
+  max-width: none;
+}
+
+.prose p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--foreground);
+  font-weight: 600;
+  margin: 1.5em 0 0.5em 0;
+}
+
+.prose ul, .prose ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin: 0.5em 0;
+}
+
+.prose code {
+  background: var(--muted);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: var(--muted);
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+/* Official Government Watermark */
+.government-watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.1;
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--sa-green);
+  pointer-events: none;
+  user-select: none;
+  transform: rotate(-15deg);
+  z-index: 0;
+}
+
+/* Loading States */
+.loading-spinner {
+  border: 3px solid var(--border);
+  border-top-color: var(--sa-green);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Document Status Indicators */
+.doc-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doc-status-pending {
+  background: #FFF3CD;
+  color: #856404;
+  border: 1px solid #FFE69C;
+}
+
+.doc-status-processing {
+  background: #CCE5FF;
+  color: #004085;
+  border: 1px solid #B8DAFF;
+}
+
+.doc-status-approved {
+  background: #D4EDDA;
+  color: #155724;
+  border: 1px solid #C3E6CB;
+}
+
+.doc-status-rejected {
+  background: #F8D7DA;
+  color: #721C24;
+  border: 1px solid #F5C6CB;
+}
+
+/* Enhanced Web3 and Mobile Responsiveness */
+.blockchain-verified {
+  border: 2px solid var(--sa-green);
+  background: rgba(0, 119, 73, 0.1);
+  animation: verified-pulse 2s ease-in-out infinite;
+}
+
+.blockchain-pending {
+  border: 2px solid var(--sa-yellow);
+  background: rgba(252, 181, 20, 0.1);
+  animation: pending-pulse 1.5s ease-in-out infinite;
+}
+
+.blockchain-failed {
+  border: 2px solid var(--sa-red);
+  background: rgba(222, 56, 49, 0.1);
+}
+
+@keyframes verified-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 119, 73, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(0, 119, 73, 0); }
+}
+
+@keyframes pending-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(252, 181, 20, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(252, 181, 20, 0); }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .mobile-enhanced {
+    padding: 0.75rem;
+    margin: 0.5rem;
+  }
+  
+  .mobile-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .mobile-button {
+    width: 100%;
+    min-height: 48px;
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
+  }
+  
+  .mobile-form {
+    padding: 1rem;
+  }
+  
+  .mobile-header {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .mobile-card-stack {
+    margin: 0.5rem 0;
+  }
+  
+  .mobile-nav-safe {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* DHA VFS Integration Styles */
+.vfs-status {
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--sa-green);
+  background: rgba(0, 119, 73, 0.05);
+}
+
+.vfs-status.under-review {
+  border-left-color: var(--sa-yellow);
+  background: rgba(252, 181, 20, 0.05);
+}
+
+.vfs-status.approved {
+  border-left-color: var(--sa-green);
+  background: rgba(0, 119, 73, 0.05);
+}
+
+.vfs-status.rejected {
+  border-left-color: var(--sa-red);
+  background: rgba(222, 56, 49, 0.05);
+}
+
+/* Web3 Wallet Styles */
+.wallet-connected {
+  background: linear-gradient(135deg, var(--sa-green) 0%, #005432 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-disconnected {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+/* Enhanced Government Glass Effect */
+.government-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 119, 73, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 119, 73, 0.1);
+}

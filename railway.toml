@@ -1,0 +1,20 @@
+[build]
+builder = "NIXPACKS"
+
+[build.buildCommand]
+command = "npm install && cd client && npm install && cd .. && npm run build"
+
+[deploy]
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+startCommand = "./start.sh"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+[env]
+PORT = "3000"
+HOST = "0.0.0.0"
+
+[services.web]
+build.builder = "NIXPACKS"
+build.buildCommand = "npm install && cd client && npm install && cd .. && npm run build"
