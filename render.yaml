@@ -1,0 +1,91 @@
+# Exported from Render on 2025-09-26T16:31:17Z
+version: "1"
+projects:
+- name: Dha
+  environments:
+  - name: NODE_ENV
+    services:
+    - type: web
+      name: dha-digital-services-platform
+      runtime: node
+      repo: https://github.com/raeesao620-ux/dha-digital-services-platform
+      plan: free
+      envVars:
+      - key: DOCUMENTS_DIR
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: SITA_ESERVICES_BASE_URL
+        sync: false
+      - key: ICAO_PKD_BASE_URL
+        sync: false
+      - key: DHA_ABIS_BASE_URL
+        sync: false
+      - key: SAPS_CRC_BASE_URL
+        sync: false
+      - key: DHA_NPR_BASE_URL
+        sync: false
+      - key: MILITARY_GRADE_SECURITY
+        sync: false
+      - key: QUANTUM_ENCRYPTION_ENABLED
+        sync: false
+      - key: AUDIT_LOGGING_ENABLED
+        sync: false
+      - key: MONITORING_ENABLED
+        sync: false
+      - key: SITA_ESERVICES_ENABLED
+        sync: false
+      - key: ICAO_PKD_ENABLED
+        sync: false
+      - key: DHA_ABIS_ENABLED
+        sync: false
+      - key: SAPS_CRC_ENABLED
+        sync: false
+      - key: DHA_NPR_ENABLED
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SITA_ESERVICES_API_KEY
+        sync: false
+      - key: ICAO_PKD_API_KEY
+        sync: false
+      - key: DHA_ABIS_API_KEY
+        sync: false
+      - key: SAPS_CRC_API_KEY
+        sync: false
+      - key: DHA_NPR_API_KEY
+        sync: false
+      - key: DOCUMENT_SIGNING_KEY
+        sync: false
+      - key: BIOMETRIC_ENCRYPTION_KEY
+        sync: false
+      - key: QUANTUM_ENCRYPTION_KEY
+        sync: false
+      - key: MASTER_ENCRYPTION_KEY
+        sync: false
+      - key: VITE_ENCRYPTION_KEY
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: PORT
+        sync: false
+      - key: NODE_ENV
+        sync: false
+      region: oregon
+      buildCommand: npm install
+      startCommand: 'npm start '
+      autoDeployTrigger: "off"
